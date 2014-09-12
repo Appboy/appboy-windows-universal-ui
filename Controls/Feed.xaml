@@ -1,0 +1,99 @@
+﻿<UserControl
+  x:Class="AppboyUI.Universal.Controls.Feed"
+  DataContext="{Binding FeedViewModel, RelativeSource={RelativeSource Self}}"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:AppboyUI.Universal.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:controls="using:AppboyUI.Universal.Controls"
+  xmlns:converters="using:AppboyUI.Universal.Converters"
+  xmlns:utilities="using:AppboyUI.Universal.Utilities"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary Source="ms-appx:///AppboyUI/Assets/Styles/Appboy.xaml"/>
+  </UserControl.Resources>
+
+  <Grid>
+    <ListBox x:Name="FeedListBox" ItemsSource="{Binding}" VirtualizingStackPanel.VirtualizationMode="Recycling"  Style="{StaticResource Appboy.Feed.FeedListBox}" >
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <utilities:CardTemplateSelector Content="{Binding}">
+            <utilities:CardTemplateSelector.BannerDataTemplate>
+              <DataTemplate>
+                <Image x:Name="BannerDataTemplate"  Source="{Binding ImageUrl}" Tapped="Card_Tapped" Width="{Binding ActualWidth, Mode=OneWay, ElementName=FeedListBox, Converter={StaticResource Appboy.Feed.AdditionConverter}, ConverterParameter=-25}" Height="{Binding Width, Mode=OneWay, ElementName=BannerDataTemplate, Converter={StaticResource Appboy.Feed.AspectRatioConverter}, ConverterParameter=0.16666666666}" Style="{StaticResource Appboy.Feed.BannerDataTemplateImage}"/>
+              </DataTemplate>
+            </utilities:CardTemplateSelector.BannerDataTemplate>
+            <utilities:CardTemplateSelector.CaptionedImageDataTemplate>
+              <DataTemplate>
+                <StackPanel x:Name="CaptionedImageDataTemplate" Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplate}" Tapped="Card_Tapped" Width="{Binding ActualWidth, Mode=OneWay, ElementName=FeedListBox, Converter={StaticResource Appboy.Feed.AdditionConverter}, ConverterParameter=-25}">
+                  <Image x:Name="CaptionedImageDataTemplateImage" Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplateImage}" Source="{Binding ImageUrl}" Width="{Binding Width, Mode=OneWay, ElementName=CaptionedImageDataTemplate}" Height="{Binding Width, Mode=OneWay, ElementName=CaptionedImageDataTemplateImage, Converter={StaticResource Appboy.Feed.AspectRatioConverter}, ConverterParameter=0.75}"/>
+                  <StackPanel Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplateStackPanel}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplateTitle}"/>
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplateDescription}"/>
+                    <TextBlock Text="{Binding Domain}" Visibility="{Binding Domain, Converter={StaticResource Appboy.Feed.NullToVisibilityConverter}}"  Style="{StaticResource Appboy.Feed.CaptionedImageDataTemplateDomain}"/>
+                  </StackPanel>
+                </StackPanel>
+              </DataTemplate>
+            </utilities:CardTemplateSelector.CaptionedImageDataTemplate>
+            <utilities:CardTemplateSelector.CrossPromotionSmallDataTemplate>
+              <DataTemplate>
+                <Grid Width="{Binding ActualWidth, Mode=OneWay, ElementName=FeedListBox, Converter={StaticResource Appboy.Feed.AdditionConverter}, ConverterParameter=-25}"  Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateGrid}">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.RowSpan="3" Grid.Column="0" Source="{Binding ImageUrl}"  Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateImage}"/>
+                  <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Title}" Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateTitle}"/>
+                  <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Subtitle}"/>
+                  <StackPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateStackPanel}">
+                    <controls:StarRating Rating="{Binding Rating}" Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateStarRating}"/>
+                    <TextBlock Text="{Binding ReviewCount, Converter={StaticResource Appboy.Feed.SurroundingParenthesesConverter}}" Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateStarRatingTextBlock}"/>
+                  </StackPanel>
+                  <Button  Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Margin="0,0,22,8" Width="90" Content="{Binding Price, Converter={StaticResource Appboy.Feed.PriceConverter}}" Background="#80c7f4" Foreground="#ffffff" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="CrossPromotionSmallPrice_Click"  Style="{StaticResource Appboy.Feed.CrossPromotionDataTemplateButton}"/>
+                </Grid>
+              </DataTemplate>
+            </utilities:CardTemplateSelector.CrossPromotionSmallDataTemplate>
+            <utilities:CardTemplateSelector.ShortNewsDataTemplate>
+              <DataTemplate>
+                <Grid Tapped="Card_Tapped" Width="{Binding ActualWidth, Mode=OneWay, ElementName=FeedListBox, Converter={StaticResource Appboy.Feed.AdditionConverter}, ConverterParameter=-25}" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateGrid}">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.Column="0" Source="{Binding ImageUrl}" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateImage}"/>
+                  <StackPanel Grid.Column="1" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateStackPanel}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateTitle}"/>
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateDescription}"/>
+                    <TextBlock Text="{Binding Domain}" Visibility="{Binding Domain, Converter={StaticResource Appboy.Feed.NullToVisibilityConverter}}" Style="{StaticResource Appboy.Feed.ShortNewsDataTemplateDomain}"/>
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </utilities:CardTemplateSelector.ShortNewsDataTemplate>
+            <utilities:CardTemplateSelector.TextAnnouncementDataTemplate>
+              <DataTemplate>
+                <Border Width="{Binding ActualWidth, Mode=OneWay, ElementName=FeedListBox, Converter={StaticResource Appboy.Feed.AdditionConverter}, ConverterParameter=-25}" Tapped="Card_Tapped" Style="{StaticResource Appboy.Feed.TextAnnouncementDataTemplateBorder}">
+                  <StackPanel Style="{StaticResource Appboy.Feed.TextAnnouncementDataTemplateStackPanel}">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource Appboy.Feed.TextAnnouncementDataTemplateTitle}"/>
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource Appboy.Feed.TextAnnouncementDataTemplateDescription}"/>
+                    <TextBlock Text="{Binding Domain}" Visibility="{Binding Domain, Converter={StaticResource Appboy.Feed.NullToVisibilityConverter}}" Style="{StaticResource Appboy.Feed.TextAnnouncementDataTemplateDomain}"/>
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </utilities:CardTemplateSelector.TextAnnouncementDataTemplate>
+          </utilities:CardTemplateSelector>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <ProgressRing x:Name="FeedProgressRing" IsActive="{Binding RefreshingFeed}" Visibility="{Binding RefreshingFeed, Converter={StaticResource Appboy.Feed.BoolToVisibilityConverter}}" Style="{StaticResource Appboy.Feed.FeedProgressRing}"/>
+    <TextBox x:Name="NetworkErrorMessage" Text="{CustomResource FeedNetworkErrorMessage}" TextWrapping="Wrap" Visibility="{Binding NetworkUnavailable, Converter={StaticResource Appboy.Feed.BoolToVisibilityConverter}}" Style="{StaticResource Appboy.Feed.NetworkErrorMessageTextBox}"/>
+    <TextBox x:Name="FeedEmptyMessage" Text="{CustomResource FeedFeedEmptyMessage}" TextWrapping="Wrap" Visibility="{Binding EmptyFeed, Converter={StaticResource Appboy.Feed.BoolToVisibilityConverter}}" Style="{StaticResource Appboy.Feed.NetworkErrorMessageTextBox}"/>
+  </Grid>
+</UserControl>

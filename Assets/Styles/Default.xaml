@@ -1,0 +1,392 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AppboyUI.Universal.Controls"
+    xmlns:converters="using:AppboyUI.Universal.Converters"
+    xmlns:utilities="using:AppboyUI.Universal.Utilities"
+    xmlns:local="using:AppboyUI.Universal.Styles">
+
+  <!-- Feed Styles -->  
+  <converters:AdditionConverter x:Key="Appboy.Feed.AdditionConverter"/>
+  <converters:AspectRatioConverter x:Key="Appboy.Feed.AspectRatioConverter"/>
+  <converters:BoolToVisibilityConverter x:Key="Appboy.Feed.BoolToVisibilityConverter"/>
+  <converters:NullToVisibilityConverter x:Key="Appboy.Feed.NullToVisibilityConverter"/>
+  <converters:PriceConverter x:Key="Appboy.Feed.PriceConverter"/>
+  <converters:SurroundingParenthesesConverter x:Key="Appboy.Feed.SurroundingParenthesesConverter"/>
+
+  <Style x:Key="Appboy.Feed.FeedListBox" TargetType="ListBox">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+    <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="True"/>
+    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+    <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+    <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>    
+    <Setter Property="TabNavigation" Value="Once"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListBox">
+          <Border x:Name="LayoutRoot" 
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Disabled">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot"
+                          Storyboard.TargetProperty="BorderBrush">
+                      <DiscreteObjectKeyFrame KeyTime="0"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup x:Name="FocusStates">
+                <VisualState x:Name="Focused">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot" Storyboard.TargetProperty="Background">
+                      <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Unfocused"/>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ScrollViewer x:Name="ScrollViewer"
+                  Padding="{TemplateBinding Padding}"
+                  TabNavigation="{TemplateBinding TabNavigation}"
+                  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                  ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                 >
+              <ItemsPresenter/>
+            </ScrollViewer>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <!-- BannerImage Card -->
+  <Style x:Key="Appboy.Feed.BannerDataTemplateImage" TargetType="Image">
+    <Setter Property="Margin" Value="10,4,10,4"/>
+    <Setter Property="Stretch" Value="Uniform"/>
+  </Style>
+  <!-- CaptionedImage Card -->
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplate" TargetType="StackPanel">
+    <Setter Property="Background" Value="#ffffff"/>
+    <Setter Property="Margin" Value="10,4,10,4"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplateImage" TargetType="Image">
+    <Setter Property="Stretch" Value="Uniform"/>    
+  </Style>
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplateStackPanel" TargetType="StackPanel">
+    <Setter Property="Margin" Value="11,11,22,11"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplateTitle" TargetType="TextBlock">    
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Foreground" Value="#404751"/>
+    <Setter Property="LineHeight" Value="0.952"/>
+    <Setter Property="Margin" Value="0,0,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplateDescription" TargetType="TextBlock">    
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Foreground" Value="#2c2c2c"/>
+    <Setter Property="Margin" Value="0,5,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CaptionedImageDataTemplateDomain" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="FontWeight" Value="Bold"/>    
+    <Setter Property="Foreground" Value="#80c7f4"/>
+    <Setter Property="Margin" Value="0,5,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <!-- CrossPromotionSmall Card -->
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateGrid" TargetType="Grid">
+    <Setter Property="Background" Value="#ffffff"/>
+    <Setter Property="Margin" Value="10,4,10,4"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateImage" TargetType="Image">
+    <Setter Property="Height" Value="55"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="Margin" Value="11"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>    
+    <Setter Property="Width" Value="55"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateTitle" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>    
+    <Setter Property="Foreground" Value="#404751"/>
+    <Setter Property="Margin" Value="0,11,11,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateSubTitle" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="FontWeight" Value="Bold"/>    
+    <Setter Property="Foreground" Value="#80c7f4"/>
+    <Setter Property="Margin" Value="0,5,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>    
+  </Style>  
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateStackPanel" TargetType="StackPanel">
+    <Setter Property="Height" Value="20"/>
+    <Setter Property="Margin" Value="0,0,5,11"/>
+    <Setter Property="Orientation" Value="Horizontal"/>    
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateStarRating" TargetType="controls:StarRating">    
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Width" Value="75"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateStarRatingTextBlock" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="FontWeight" Value="Bold"/>    
+    <Setter Property="Foreground" Value="#2d2d2d"/>
+    <Setter Property="Margin" Value="2,2,2,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.CrossPromotionDataTemplateButton" TargetType="Button">
+    <Setter Property="Background" Value="#80c7f4"/>
+    <Setter Property="Foreground" Value="#ffffff"/>        
+    <Setter Property="HorizontalAlignment" Value="Right"/>
+    <Setter Property="Margin" Value="0,0,22,8"/>
+    <Setter Property="VerticalAlignment" Value="Bottom"/>
+    <Setter Property="Width" Value="99"/>
+  </Style>
+  <!-- ShortNews Card -->
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateGrid" TargetType="Grid">
+    <Setter Property="Background" Value="#ffffff"/>
+    <Setter Property="Margin" Value="10,4,10,4"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateImage" TargetType="Image">
+    <Setter Property="Height" Value="55"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>    
+    <Setter Property="Margin" Value="11"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="Width" Value="55"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateStackPanel" TargetType="StackPanel">
+    <Setter Property="Background" Value="#ffffff"/>
+    <Setter Property="Margin" Value="0,11,22,11"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateTitle" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>  
+    <Setter Property="Foreground" Value="#404751"/>
+    <Setter Property="LineHeight" Value="0.952"/>
+    <Setter Property="Margin" Value="0"/>    
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateDescription" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="15"/>
+    <Setter Property="FontWeight" Value="Light"/>    
+    <Setter Property="Foreground" Value="#2c2c2c"/>
+    <Setter Property="Margin" Value="0,5,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.ShortNewsDataTemplateDomain" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="Bold"/>    
+    <Setter Property="Foreground" Value="#80c7f4"/>
+    <Setter Property="Margin" Value="0,5,5,0"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <!-- TextAnnouncement Card -->
+  <Style x:Key="Appboy.Feed.TextAnnouncementDataTemplateBorder" TargetType="Border">
+    <Setter Property="Background" Value="#ffffff"/>
+    <Setter Property="Margin" Value="10,4,10,4"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.TextAnnouncementDataTemplateStackPanel" TargetType="StackPanel">    
+    <Setter Property="Margin" Value="11,11,22,11"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.TextAnnouncementDataTemplateTitle" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>    
+    <Setter Property="Foreground" Value="#404751"/>
+    <Setter Property="LineHeight" Value="0.952"/>
+    <Setter Property="Margin" Value="0"/>    
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.TextAnnouncementDataTemplateDescription" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="15"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Foreground" Value="#2c2c2c"/>
+    <Setter Property="Margin" Value="0,5,0,0"/>    
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.TextAnnouncementDataTemplateDomain" TargetType="TextBlock">
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="13"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Foreground" Value="#80c7f4"/>
+    <Setter Property="Margin" Value="0,5,0,0"/>    
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <!-- Global Feed Styles -->
+  <Style x:Key="Appboy.Feed.FeedProgressRing" TargetType="ProgressRing">
+    <Setter Property="Height" Value="100"/>
+    <Setter Property="Width" Value="100"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.NetworkErrorMessageTextBox" TargetType="TextBox">
+    <Setter Property="Foreground" Value="Black"/>
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="IsReadOnly" Value="True"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+  <Style x:Key="Appboy.Feed.FeedEmptyMessageTextBox" TargetType="TextBox">
+    <Setter Property="Foreground" Value="Black"/>
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="IsReadOnly" Value="True"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>    
+  </Style>
+  
+  <!-- Modal Feed Styles -->
+  <Style x:Key="Appboy.ModalFeed.Grid" TargetType="Grid">
+    <Setter Property="Background" Value="Black"/>
+  </Style>  
+  <Style x:Key="Appboy.ModalFeed.CloseButton" TargetType="Button">
+    <Setter Property="HorizontalAlignment" Value="Right"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Padding" Value="0,5,5,0"/>
+  </Style>
+  <Style x:Key="Appboy.ModalFeed.CloseButton.Image" TargetType="Image">
+    <Setter Property="Source" Value="ms-appx:///AppboyUIStore/Assets/Images/Close/close.png"/>
+    <Setter Property="Height" Value="48"/>
+  </Style>
+  <Style x:Key="Appboy.ModalFeed.CloseButton.TextBlock" TargetType="TextBlock">
+    <Setter Property="Visibility" Value="Collapsed"/>
+  </Style>
+  <Style x:Key="Appboy.ModalFeed.TitleTextBlock" TargetType="TextBlock">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Foreground" Value="#ffffff"/>
+    <Setter Property="Margin" Value="20,0,0,0"/>
+  </Style>
+  <Style x:Key="Appboy.ModalFeed.Feed" TargetType="controls:Feed">
+    <Setter Property="Width" Value="400"/>
+  </Style>
+
+  <!-- Feedback Styles -->
+  <Style x:Key="Appboy.Feedback.ReportingIssueCheckBox" TargetType="CheckBox">
+  </Style>
+  <Style x:Key="Appboy.Feedback.ReportingIssueCheckBox.TextBlock" TargetType="TextBlock">    
+    <Setter Property="FontSize" Value="25"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="Foreground" Value="#ffffff"/>
+    <Setter Property="Margin" Value="0,-7,0,0"/>
+  </Style>
+  <Style x:Key="Appboy.Feedback.MessageTextBox" TargetType="TextBox">
+    <Setter Property="BorderBrush" Value="#ffffff"/>
+    <Setter Property="Background" Value="#ffffff"/>    
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="17"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Margin" Value="5"/>
+  </Style>
+  <Style x:Key="Appboy.Feedback.EmailTextBlock" TargetType="TextBlock">        
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="Foreground" Value="#ffffff"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Margin" Value="5,5,10,5"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+  <Style x:Key="Appboy.Feedback.EmailTextBox" TargetType="TextBox">        
+    <Setter Property="Background" Value="#ffffff"/>    
+    <Setter Property="BorderBrush" Value="#ffffff"/>
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="17"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="Margin" Value="5,5,10,5"/>
+    <Setter Property="Padding" Value="10,6,10,6"/>    
+  </Style>
+  <Style x:Key="Appboy.Feedback.CancelButton" TargetType="Button">
+    <Setter Property="Background" Value="#80c7f4"/>
+    <Setter Property="BorderThickness" Value="0"/>    
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Light"/>    
+    <Setter Property="Foreground" Value="#ffffff"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>    
+  </Style>
+  <Style x:Key="Appboy.Feedback.SubmitButton" TargetType="Button">
+    <Setter Property="Background" Value="#80c7f4"/>
+    <Setter Property="BorderThickness" Value="0"/>    
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Light"/>    
+    <Setter Property="Foreground" Value="#ffffff"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+  </Style>
+
+  <!-- Slideup Styles -->
+  <Style x:Key="Appboy.Slideup.Border" TargetType="Border">
+    <Setter Property="BorderBrush" Value="#363636"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+  <Style x:Key="Appboy.Slideup.Grid" TargetType="Grid">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="#222222"/>
+    <Setter Property="Opacity" Value=".80"/>
+  </Style>
+  <Style x:Key="Appboy.Slideup.MessageTextBlock" TargetType="TextBlock">
+    <Setter Property="Margin" Value="10,20,10,20"/>
+    <Setter Property="TextWrapping" Value="Wrap"/>
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="FontFamily" Value="Segoe WP"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+  </Style>
+  <Style x:Key="Appboy.Slideup.ChevronImage" TargetType="Image">
+    <Setter Property="Margin" Value="10,0,10,0"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+
+  <!-- StarRating Styles -->
+  <Style x:Key="Appboy.StarRating.Image" TargetType="Image">
+    <Setter Property="Height" Value="15"/>  
+    <Setter Property="Width" Value="15"/>
+  </Style>
+</ResourceDictionary>

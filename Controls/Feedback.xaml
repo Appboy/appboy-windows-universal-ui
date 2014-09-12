@@ -1,0 +1,38 @@
+﻿<UserControl
+  x:Class="AppboyUI.Universal.Controls.Feedback"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:AppboyUI.Universal.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:controls="using:AppboyUI.Universal.Controls"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary Source="ms-appx:///AppboyUI/Assets/Styles/Appboy.xaml"/>
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <CheckBox Grid.Row="0" Margin="5" Name="ReportingIssueCheckBox" Style="{StaticResource Appboy.Feedback.ReportingIssueCheckBox}">
+      <TextBlock  Style="{StaticResource Appboy.Feedback.ReportingIssueCheckBox.TextBlock}" Text="{CustomResource FeedbackReportingAnIssue}"/>
+    </CheckBox>
+    <TextBox  Style="{StaticResource Appboy.Feedback.MessageTextBox}" Grid.Row="1" Name="MessageTextBox" TextWrapping="Wrap" AcceptsReturn="True" InputScope="Default" Margin="5,4.833,5,0" Height="446"/>
+    <TextBlock Style="{StaticResource Appboy.Feedback.EmailTextBlock}" Grid.Row="2" Text="{CustomResource FeedbackEmail}"/>
+    <TextBox Style="{StaticResource Appboy.Feedback.EmailTextBox}" Grid.Row="3" Name="EmailTextBox" InputScope="EmailSmtpAddress"/>
+    <Grid Grid.Row="4" Margin="2,5,2,5">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Button Style="{StaticResource Appboy.Feedback.CancelButton}" Grid.Column="0" Content="{CustomResource FeedbackCancel}" Height="50" Margin="0,0,2,2" Click="Cancel_Click"/>
+      <Button Style="{StaticResource Appboy.Feedback.SubmitButton}" Grid.Column="1" Content="{CustomResource FeedbackSubmit}" Height="50" Margin="2,0,0,2" Click="Submit_Click"/>
+    </Grid>
+  </Grid>
+</UserControl>

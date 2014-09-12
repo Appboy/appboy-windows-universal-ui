@@ -1,0 +1,22 @@
+﻿<UserControl
+  x:Class="AppboyUI.Universal.Controls.StarRating"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  d:DesignWidth="75"
+  d:DesignHeight="15">
+
+  <UserControl.Resources>
+    <ResourceDictionary Source="ms-appx:///AppboyUI/Assets/Styles/Appboy.xaml"/>
+  </UserControl.Resources>
+
+  <StackPanel x:Name="StarStackPanel" Orientation="Horizontal">
+    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+  </StackPanel>
+</UserControl>
