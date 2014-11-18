@@ -208,10 +208,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AppboyPlatform.PCL" Condition="'$(Configuration)'!='AppboyDebugWindows8' And '$(Configuration)'!='AppboyReleaseWindows8'">
-      <HintPath>$(SolutionDir)packages\AppboyPlatform.Universal.Release.1.3.0.0\lib\win\AppboyPlatform.PCL.dll</HintPath>
+      <HintPath>$(SolutionDir)packages\AppboyPlatform.Universal.Release.1.3.1.0\lib\win\AppboyPlatform.PCL.dll</HintPath>
     </Reference>
     <Reference Include="AppboyPlatform.Universal" Condition="'$(Configuration)'!='AppboyDebugWindows8' And '$(Configuration)'!='AppboyReleaseWindows8'">
-      <HintPath>$(SolutionDir)packages\AppboyPlatform.Universal.Release.1.3.0.0\lib\win\AppboyPlatform.Universal.dll</HintPath>
+      <HintPath>$(SolutionDir)packages\AppboyPlatform.Universal.Release.1.3.1.0\lib\win\AppboyPlatform.Universal.dll</HintPath>
     </Reference>
     <Reference Include="Lex.Db">
       <HintPath>$(SolutionDir)packages\Lex.Db.1.2.1.0\lib\netcore45\Lex.Db.dll</HintPath>
