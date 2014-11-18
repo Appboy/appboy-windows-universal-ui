@@ -1,6 +1,6 @@
-using AppboyPlatform.PCL.Models.Incoming.Cards;
 using System.Diagnostics;
 using Windows.UI.Xaml;
+using AppboyPlatform.PCL.Models.Incoming.Cards;
 
 namespace AppboyUI.Universal.Utilities {
   public class CardTemplateSelector : DataTemplateSelector {
@@ -11,20 +11,23 @@ namespace AppboyUI.Universal.Utilities {
     public DataTemplate TextAnnouncementDataTemplate { get; set; }
 
     public override DataTemplate SelectTemplate(object item, DependencyObject container) {
-      BaseCard card = item as BaseCard;
+      var card = item as BaseCard;
       if (card is Banner) {
         return BannerDataTemplate;
-      } else if (card is CaptionedImage) {
-        return CaptionedImageDataTemplate;
-      } else if (card is CrossPromotionSmall) {
-        return CrossPromotionSmallDataTemplate;
-      } else if (card is ShortNews) {
-        return ShortNewsDataTemplate;
-      } else if (card is TextAnnouncement) {
-        return TextAnnouncementDataTemplate;
-      } else {
-        Debug.WriteLine("Could not find the appropriate template for card {0}.", card);
       }
+      if (card is CaptionedImage) {
+        return CaptionedImageDataTemplate;
+      }
+      if (card is CrossPromotionSmall) {
+        return CrossPromotionSmallDataTemplate;
+      }
+      if (card is ShortNews) {
+        return ShortNewsDataTemplate;
+      }
+      if (card is TextAnnouncement) {
+        return TextAnnouncementDataTemplate;
+      }
+      Debug.WriteLine("Could not find the appropriate template for card {0}.", card);
       return base.SelectTemplate(item, container);
     }
 

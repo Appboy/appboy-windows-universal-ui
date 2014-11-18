@@ -13,10 +13,15 @@
   </UserControl.Resources>
 
   <StackPanel x:Name="StarStackPanel" Orientation="Horizontal">
-    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
-    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
-    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
-    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
-    <Image Style="{StaticResource Appboy.StarRating.Image}" Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}"
+           Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}"
+           Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}"
+           Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}"
+           Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
+    <Image Style="{StaticResource Appboy.StarRating.Image}"
+           Source="ms-appx:///AppboyUIStore/Assets/Images/Star/Blue/com_appboy_star_empty.png"/>
   </StackPanel>
 </UserControl>

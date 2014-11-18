@@ -19,7 +19,8 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <TextBlock Grid.Row="0" Style="{StaticResource Appboy.ModalFeed.TitleTextBlock}" Text="{CustomResource ModalFeedTitle}"/>
+    <TextBlock Grid.Row="0" Style="{StaticResource Appboy.ModalFeed.TitleTextBlock}"
+               Text="{CustomResource ModalFeedTitle}"/>
     <Button Grid.Row="0" x:Name="Close" Style="{StaticResource Appboy.ModalFeed.CloseButton}" Click="Close_Click">
       <StackPanel>
         <Image Style="{StaticResource Appboy.ModalFeed.CloseButton.Image}"/>

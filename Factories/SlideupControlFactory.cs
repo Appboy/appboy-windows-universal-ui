@@ -1,7 +1,7 @@
-using AppboyPlatform.PCL.Models.Incoming;
-using AppboyPlatform.Universal.Managers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using AppboyPlatform.PCL.Models.Incoming;
+using AppboyPlatform.Universal.Managers;
 
 namespace AppboyUI.Universal.Factories {
   public class SlideupControlFactory : ISlideupControlFactory {

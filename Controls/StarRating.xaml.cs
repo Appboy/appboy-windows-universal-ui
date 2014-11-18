@@ -1,8 +1,8 @@
-using AppboyPlatform.PCL.Utilities;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using AppboyPlatform.PCL.Utilities;
 
 namespace AppboyUI.Universal.Controls {
   public sealed partial class StarRating : UserControl {
@@ -17,9 +17,7 @@ namespace AppboyUI.Universal.Controls {
     }
 
     public double Rating {
-      get {
-        return (double)GetValue(RatingProperty);
-      }
+      get { return (double)GetValue(RatingProperty); }
       set {
         if (value < 0) {
           SetValue(RatingProperty, 0);
@@ -33,20 +31,20 @@ namespace AppboyUI.Universal.Controls {
 
     public void UpdateUserInterface() {
       double roundedRating = Formatter.RoundToNearestMultipleOfOneHalf(Rating);
-      int ratingFloor = (int)Math.Floor(roundedRating);
+      var ratingFloor = (int)Math.Floor(roundedRating);
       for (int i = 0; i < ratingFloor; i++) {
         SetStarImage(i, FullStarUri);
       }
-      for (int i = (int)Math.Ceiling(roundedRating); i < MaxStars; i++) {
+      for (var i = (int)Math.Ceiling(roundedRating); i < MaxStars; i++) {
         SetStarImage(i, EmptyStarUri);
       }
-      if (roundedRating % 1 != 0d) {
+      if (roundedRating%1 != 0d) {
         SetStarImage(ratingFloor, HalfStarUri);
       }
     }
 
     private void SetStarImage(int index, Uri image) {
-      Image star = StarStackPanel.Children[index] as Image;
+      var star = StarStackPanel.Children[index] as Image;
       if (star != null && image != null) {
         star.Source = new BitmapImage(image);
       }

@@ -4,10 +4,10 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace AppboyUI.Universal.Controls {
   public sealed partial class ModalFeed : UserControl {
-    private Popup _popup;
+    private readonly Popup _popup;
 
     public ModalFeed(Popup popup) {
-      this.InitializeComponent();
+      InitializeComponent();
       _popup = popup;
     }
 
